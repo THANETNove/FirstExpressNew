@@ -203,11 +203,18 @@ class InvoiceController extends Controller
                     ->orderBy('invoices.id', 'asc')
                     ->get();
 
-                }else{
+                }else if ($name) {
                     $billData = DB::table('customers')
                     ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
                     ->where("name", 'LIKE', '%'.$name. '%')
                     ->orWhere("documentThat", 'LIKE', '%'.$documentThat. '%')
+                    ->where("status", '=', 'Unpaid')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+                }else{
+                   
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
                     ->where("status", '=', 'Unpaid')
                     ->orderBy('invoices.id', 'asc')
                     ->get();
@@ -216,7 +223,7 @@ class InvoiceController extends Controller
 
                  
         }else{
-
+              
             $billData = DB::table('customers')
             ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
             ->orderBy('invoices.id', 'asc')
