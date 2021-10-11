@@ -110,7 +110,7 @@
                                                                         <tr role="row">
                                                                             <th class="col-sm-1">
                                                                                 <div class="text-center ">
-                                                                                    <input class="list-invo"
+                                                                                    <input class="list-invo allClick-cha" 
                                                                                         type="checkbox" value=""
                                                                                         id="flexCheckDefault">
                                                                                 </div>
@@ -156,7 +156,7 @@
                                                                             <td>
                                                                                 <div class="text-center">
                                                                                     <input
-                                                                                        class="form-check-input click"
+                                                                                        class="form-check-input click-cha"
                                                                                         type="checkbox"
                                                                                         value="{{$user->id}}"
                                                                                         id="flexCheck">
@@ -314,5 +314,6 @@
 </div>
 <!-- ./wrapper -->
 @include('maun_footer.footer')
+@include('bill.script.list_charge')
 
 @endsection
