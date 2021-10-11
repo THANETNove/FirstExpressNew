@@ -233,6 +233,6 @@
 </div>
 <!-- ./wrapper -->
 @include('maun_footer.footer')
-@include('bill.scrript.list_invoice')
+@include('bill.script.list_invoice')
 
 @endsection
