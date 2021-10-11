@@ -87,10 +87,7 @@ class DesktopController extends Controller
     }
 
        
-    public function list_charge()
-    {
-        return view('invoice.list_charge');
-    }
+   
 
     public function receipt_list()
     {

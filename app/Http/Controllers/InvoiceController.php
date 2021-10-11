@@ -136,6 +136,100 @@ class InvoiceController extends Controller
        return view('bill.invoice' ,[ 'countInvoice' => $countInvoice, 'user' => $user]);
     }
 
+    public function list_charge(Request $request)
+    {
+        
+        $invoiceName = DB::table('invoices')
+        ->select('name')
+        ->distinct()
+        ->where("status", '=', 'Unpaid')
+        ->get();
+
+        $invoiceDocumentThat = DB::table('invoices')
+        ->select('documentThat')
+        ->distinct()
+        ->where("status", '=', 'Unpaid')
+        ->get();
+
+        $invoiceStatus = DB::table('invoices')
+        ->select('status')
+        ->distinct()
+        ->where("status", '=', 'Unpaid')
+        ->get();
+
+
+        $data = $request->all();
+
+        if ($data) {
+                    $name =   $request->name;
+                    $documentThat = $request->documentThat;
+                    $status = $request->status;
+                    $search = $request->search;
+                    $dateOut = $request->dateOut;
+                    $dateEnd = $request->dateEnd;
+
+
+
+    
+
+                if ($dateOut &&  $dateEnd) {
+                    
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("status", '=', 'Unpaid')
+                    ->where('issuedDateIssue','>=', $dateOut)
+                    ->where('dateDue','<=', $dateEnd)
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+
+                }else if ( $dateOut &&  $dateEnd &&  $name) {
+
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("status", '=', 'Unpaid')
+                    ->where('issuedDateIssue','>=', $dateOut)
+                    ->where('dateDue','<=', $dateEnd)
+                    ->where("name", 'LIKE', '%'.$name. '%')
+                    ->orWhere("documentThat", 'LIKE', '%'.$documentThat. '%')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+
+                }else if ($search){
+
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("name", 'LIKE', '%'.$search. '%')
+                    ->where("status", '=', 'Unpaid')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+
+                }else{
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("name", 'LIKE', '%'.$name. '%')
+                    ->orWhere("documentThat", 'LIKE', '%'.$documentThat. '%')
+                    ->where("status", '=', 'Unpaid')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+                }
+
+
+                 
+        }else{
+
+            $billData = DB::table('customers')
+            ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+            ->orderBy('invoices.id', 'asc')
+            ->where("status", '=', 'Unpaid')
+            ->get();
+           
+        }
+
+        return view('bill.list_charge' ,[ 'invoiceName' => $invoiceName, 'invoiceDocumentThat' => $invoiceDocumentThat , 'invoiceStatus' => $invoiceStatus ,'billData' => $billData]);
+
+       
+    }
+
     /**
      * Store a newly created resource in storage.
      *

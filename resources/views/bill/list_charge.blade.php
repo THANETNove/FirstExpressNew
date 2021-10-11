@@ -46,50 +46,52 @@
                                         <!-- Default box -->
                                         <div class="card">
                                             <div class="card-header">
-                                                <div class="card-tools">
-                                                    <a href="{{url('charge')}}" class="btn btn-danger ">เพิ่มใบเเจ้งหนี้
-                                                        <i class="fas fa-plus-square text-left white-icon"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="mb-3 row">
-                                                                <p for="inputPassword" class="col-sm-5 col-form-label">
-                                                                    วันที่ออกใบเเจ้งหนี้</p>
-                                                                <div class="col-sm-7">
-                                                                    <input type="text" class="form-control datepicker">
+                                                <form method="POST" action="list-charge">
+                                                    @csrf
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="mb-3 row">
+                                                                    <p for="inputPassword"
+                                                                        class="col-sm-5 col-form-label">
+                                                                        วันที่ออกใบเเจ้งหนี้</p>
+                                                                    <div class="col-sm-7">
+                                                                        <input type="text"
+                                                                            class="form-control datepicker" name="dateOut">
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="mb-3 row">
-                                                                <label for="inputPassword"
-                                                                    class="col-sm-2 col-form-label">ถึง</label>
-                                                                <div class="col-sm-7">
-                                                                    <input type="text"
-                                                                        class="form-control datepicker_out">
+                                                            <div class="col-md-4">
+                                                                <div class="mb-3 row">
+                                                                    <label for="inputPassword"
+                                                                        class="col-sm-2 col-form-label">ถึง</label>
+                                                                    <div class="col-sm-7">
+                                                                        <input type="text"
+                                                                            class="form-control datepicker_out" name="dateEnd">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="mb-4 row">
-                                                                <form class="d-flex">
-                                                                    <input class="form-control me-2" type="search"
-                                                                        placeholder="ค้นหา..." aria-label="Search">
-                                                                    <button class="btn btn-outline-secondary"
+                                                            <div class="col-md-4">
+                                                                <div class="mb-3 row">
+                                                                    <div class="col-sm-7">
+                                                                        <input type="text" id="search" name="search"
+                                                                            placeholder="ค้นหา..." class="form-control">
+
+                                                                    </div>
+                                                                    <button class="btn btn-outline-secondary col-sm-2"
                                                                         type="submit"><i
                                                                             class="fas fa-search"></i></button>
-                                                                </form>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <ul class="nav nav-pills nav-sidebar flex-column nav nav-tabs">
+                                                        </ul>
+                                                        <p type="button" class="text-center " data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal">เเสดงการค้นหาเพิ่มเติม <i
+                                                                class="fas fa-angle-double-down"></i></p>
                                                     </div>
-                                                    <ul class="nav nav-pills nav-sidebar flex-column nav nav-tabs"></ul>
-                                                    <p type="button" class="text-center " data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal">เเสดงการค้นหาเพิ่มเติม <i
-                                                            class="fas fa-angle-double-down"></i></p>
-                                                </div>
+                                                </form>
                                             </div>
 
                                             <div class="card-body">
@@ -128,9 +130,6 @@
                                                                                 จำนวนพัสดุ
                                                                             </th>
                                                                             <th>
-                                                                                จำนวนพัสดุ
-                                                                            </th>
-                                                                            <th>
                                                                                 ส่วนลด
                                                                             </th>
                                                                             <th>
@@ -146,37 +145,43 @@
                                                                                 สถานะ
                                                                             </th>
                                                                             <th>
-                                                                                
+
                                                                             </th>
 
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
+                                                                        @foreach ($billData as $user)
                                                                         <tr class="odd">
                                                                             <td>
                                                                                 <div class="text-center">
-                                                                                    <input class="form-check-input"
-                                                                                        type="checkbox" value=""
-                                                                                        id="flexCheckDefault">
+                                                                                    <input
+                                                                                        class="form-check-input click"
+                                                                                        type="checkbox"
+                                                                                        value="{{$user->id}}"
+                                                                                        id="flexCheck">
                                                                                 </div>
                                                                             </td>
-                                                                            <td>CUS-2431</td>
-                                                                            <td>ณ์ฮ-2431</td>
-                                                                            <td>Robert Fox</td>
-                                                                            <td>123456764556442</td>
-                                                                            <td>1432 Willoughby Rd.Sydney</td>
-                                                                            <td>Normal pick</td>
-                                                                            <td>426</td>
-                                                                            <td>426</td>
-                                                                            <td>426</td>
-                                                                            <td>Sent</td>
+                                                                            <td>{{$user->customerCode}}</td>
+                                                                            <td>{{$user->documentThat}}</td>
+                                                                            <td>{{$user->name}}</td>
+                                                                            <td></td>
+                                                                            <td>{{$user->totalItems}}</td>
+                                                                            <td></td>
+                                                                            <td>{{$user->vat}}</td>
+                                                                            <td>{{$user->netTotal}}</td>
+                                                                            <td></td>
                                                                             <td>
-                                                                                <p class="text-red">Unpaid</p>
+                                                                                <p class="text-red">
+                                                                                    {{$user->status}}
+                                                                                </p>
                                                                             </td>
-                                                                            <td><button type="button"
-                                                                                    class="btn btn-secondary">เเจ้งชำระ</button>
+                                                                            <td>
+                                                                                <a class="btn btn-secondary"
+                                                                                    href="{{url('#',$user->id)}}">เเจ้งชำระ</a>
                                                                             </td>
                                                                         </tr>
+                                                                        @endforeach
 
                                                                     </tbody>
                                                                 </table>
@@ -213,70 +218,85 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-3 row">
-                                <label for="inputPassword" class="col-sm-6 col-form-label">วันที่อกกใบเเจ้งหนี้</label>
-                                <div class="col-sm-6">
-                                    <input type="text" id="datepicker" class="form-control datepicker">
+                <form method="POST" action="list-charge">
+                    @csrf
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3 row">
+                                    <label for="inputPassword"
+                                        class="col-sm-6 col-form-label">วันที่อกกใบเเจ้งหนี้</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" id="datepicker" class="form-control datepicker"
+                                            name="dateOut">
 
-                                </div>
-                                <label for="inputPassword" class="col-sm-6 col-form-label">ลูกค้า</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control margin-model" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    </div>
+                                    <label for="inputPassword" class="col-sm-6 col-form-label">ลูกค้า</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control margin-model" aria-label="Default select example"
+                                            name="name">
+                                            @foreach ($invoiceName as $invoice)
+                                            <option value="{{$invoice->name}}">
+                                                {{$invoice->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
 
-                                </div>
-                                <label for="inputPassword" class="col-sm-6 col-form-label">เลขใบเเจ้งหนี้</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control margin-model" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <label for="inputPassword" class="col-sm-6 col-form-label">สถานะ</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control margin-model" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    </div>
+                                    <label for="inputPassword" class="col-sm-6 col-form-label">เลขใบเเจ้งหนี้</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control margin-model" aria-label="Default select example"
+                                            name="documentThat">
+                                            @foreach ($invoiceDocumentThat as $invoice)
+                                            <option value="{{$invoice->documentThat}}">
+                                                {{$invoice->documentThat}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <label for="inputPassword" class="col-sm-6 col-form-label">สถานะ</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control margin-model" aria-label="Default select example"
+                                            name="status">
+                                            @foreach ($invoiceStatus as $invoice)
+                                            <option value="{{$invoice->status}}">
+                                                {{$invoice->status}}
+                                            </option>
+                                            @endforeach
+                                        </select>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword"
-                                            class="col-sm-2 col-form-label margin-model">ถึง</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control datepicker_out">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3 row">
+                                            <label for="inputPassword"
+                                                class="col-sm-2 col-form-label margin-model">ถึง</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control datepicker_out" name="dateEnd">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3 row">
+                                            <div class="col-sm-7">
+                                                <input type="text" id="search" name="search" placeholder="ค้นหา..."
+                                                    class="form-control">
+
+                                            </div>
+                                            <button class="btn btn-outline-secondary col-sm-2" type="submit"><i
+                                                    class="fas fa-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <form class="d-flex">
-                                        <input class="form-control me-2" type="search" placeholder="Search"
-                                            aria-label="Search">
-                                        <button class="btn btn-outline-success" type="submit">ค้นหา...</button>
-                                    </form>
-                                </div>
                             </div>
                         </div>
+                        <p type="button" class="text-center " data-bs-toggle="modal">
+                            ซ่อนเเสดงการค้นหาเพิ่มเติม <i class="fas fa-angle-double-up"></i></p>
                     </div>
-                    <p type="button" class="text-center " data-bs-toggle="modal">
-                        ซ่อนเเสดงการค้นหาเพิ่มเติม <i class="fas fa-angle-double-up"></i></p>
-                </div>
+                </form>
             </div>
         </div>
     </div>

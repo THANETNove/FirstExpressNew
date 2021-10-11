@@ -66,7 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/COD-Status', [DesktopController::class, 'cod_status']);
     Route::get('/parcel-number', [DesktopController::class, 'parcel_number']);
     Route::get('/invoice', [DesktopController::class, 'invoice']);
-    Route::get('/list-charge', [DesktopController::class, 'list_charge']);
     Route::get('/receipt-list', [DesktopController::class, 'receipt_list']);
     Route::get('/charge', [DesktopController::class, 'charge']);
     Route::get('/cell-commission', [DesktopController::class, 'cell_commission']);
@@ -87,6 +86,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invoiceEidit/{id}', [InvoiceController::class, 'edit']);
     Route::post('/getInvoice', [InvoiceController::class, 'getData']);
     Route::post('/upInvoice', [InvoiceController::class, 'update']);
+    Route::get('/list-charge', [InvoiceController::class, 'list_charge']);
+    Route::post('/list-charge', [InvoiceController::class, 'list_charge']);
 });
 
 
