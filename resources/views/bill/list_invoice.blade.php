@@ -179,7 +179,7 @@
                                                     class="btn btn-danger box-inv_to " data-bs-toggle="modal" data-bs-target="#exampleModal" >ยันยันออกใบเเจ้งหนี้</button>
 
 
-                                                <button type="button"
+                                                <button  type="button" onclick="viewInvoice()"
                                                     class="btn btn-outline-danger box-inv" > ดูตัวอย่างใบเเจ้งหนี้</button>
 
 

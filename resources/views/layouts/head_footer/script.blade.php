@@ -334,7 +334,7 @@ function editInvoice(datajson) {
 
 
 function Invoice() {
-    console.log('22222');
+   // console.log('22222');
     var issuedDateIssue = jQuery('#date-issued1').val();
     var dateDue = jQuery('#date-end2').val();
     var documentThat = jQuery('#idBn-2018').val();

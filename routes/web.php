@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upInvoice', [InvoiceController::class, 'update']);
     Route::get('/list-charge', [InvoiceController::class, 'list_charge']);
     Route::post('/list-charge', [InvoiceController::class, 'list_charge']);
+    Route::get('/list-createPDF/{id}', [InvoiceController::class, 'createPDF']);
 });
 
 

@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\DB;
 use App\Models\Flight;
+use PDF;
+
 
 
 class InvoiceController extends Controller
@@ -245,7 +247,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+       // dd($request->all());
 
         
         Invoice::create([
@@ -373,6 +375,22 @@ class InvoiceController extends Controller
   
     }
 
+
+    public function down()
+    {
+        Schema::dropIfExists('employees');
+    }
+
+    public function createPDF($id) {
+        // retreive all records from db
+        $data = $addIn = Invoice::find($id);
+        // share data to view
+        view()->share('employee',$data);
+        $pdf = PDF::loadView('bill.pdf', $data);
+  
+        // download PDF file with download method
+        return $pdf->stream('pdf_file.pdf');
+      }
 
     /**
      * Remove the specified resource from storage.

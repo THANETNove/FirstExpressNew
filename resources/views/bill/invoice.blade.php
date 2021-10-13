@@ -226,9 +226,9 @@
                                 </div>
                                 <div class="col-sm-12 col-md-5 text-center">
                                     <button type="button" class="btn btn-danger">ยกเลิก</button>
-                                    <button type="button" class="btn btn-primary" onclick="Invoice()">บันทึกร่าง&nbsp;&nbsp;&nbsp; <i
+                                    <button type="button" class="btn btn-primary" >บันทึกร่าง&nbsp;&nbsp;&nbsp; <i
                                             class="fas fa-caret-down"></i></button>
-                                    <button type="submit" class="btn btn-primary summit-invoice"  >อนุมัติรายการ&nbsp;&nbsp;&nbsp;<i
+                                    <button type="submit" class="btn btn-primary summit-invoice" onclick="Invoice()" >อนุมัติรายการ&nbsp;&nbsp;&nbsp;<i
                                             class="fas fa-caret-up text-center"></i></button>
                                 </div>
                             </div>
