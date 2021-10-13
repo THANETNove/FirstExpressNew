@@ -1,61 +1,5 @@
 <script>
-$('.allClick').click(function() {
-
-    $('.click').click();
-
-
-
-
-});
-var idjson = [];
-
-function clickInvoice() {
-
-    $('.click').each(function() {
-        let checked = $(this)[0].checked;
-        if (checked === true) {
-
-
-
-            idjson.push($(this).val());
-
-        }
-
-
-    });
-
-    jQuery.ajax({
-        url: "{{ url('/update-status') }}",
-        method: 'post',
-        data: {
-            "_token": "{{ csrf_token() }}",
-            idjson,
-
-        },
-        success: function(data) {
-            valid = data.status;
-          
-            location.replace("list-invoice");
-
-
-        },
-        error: function(data) {
-            
-           $("#errorCheckbox").html('กรุณากด Click Checkbox');
-        }
-
-    });
-
-    console.log(idjson);
-
-
-}
-
-
-
-
-
-$('.click').click(function() {
+$('.click-cha').click(function() {
     let idView = [];
     let checked = $(this)[0].checked;
     if (checked === true) {
@@ -67,6 +11,7 @@ $('.click').click(function() {
     }
 
     let id = idView[0];
+    dd(id);
     if (id != undefined) {
         //console.log('tt',id);
         
@@ -78,16 +23,4 @@ $('.click').click(function() {
     }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
 </script>

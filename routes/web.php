@@ -32,20 +32,38 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::get('/get-mail', function () {
-  
-
-
-    $details = [
-        'title' => 'Mail from ItSolutionStuff.com',
-        'body' => 'This is for testing email using smtp'
-    ];
-   
-    \Mail::to('lollipopwar-love@hotmail.co.th')->send(new \App\Mail\EmailFirstExpress($details));
-   
-
-    return redirect('/receipt-list')->with('messageEmail', 'ส่ง Gmail เรียบร้อย' );
+Route::post('/get-mail', function (Request $request) {
     
+    $idMail = $request->idView;
+ 
+    $result = array();
+    foreach ($idMail as $element) {
+        $result[$element] = $element;
+    }
+
+
+
+   foreach ($result as $key) {
+            $bill = DB::table('customers')
+                ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                ->orderBy('invoices.id', 'asc')
+                ->where("invoices.id", $key)
+                ->get();
+
+                $mailUsr = $bill[0]->email;
+
+
+                $details = [
+                    'title' => 'Mail from ItSolutionStuff.com',
+                    'body' => 'This is for testing email using smtp'
+                ];
+               
+                \Mail::to($mailUsr)->send(new \App\Mail\EmailFirstExpress($details));
+
+    }
+    
+    return response()->json(['messageEmail'=>'ส่ง Gmail เรียบร้อย']);
+
 
 
 }); 

@@ -179,7 +179,7 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <a  href="{{url('get-mail')}}" 
+                                                <a  href="{{url('get-mail')}}"  id="getMail"
                                                     class="btn btn-danger box-inv">ส่งใบเเจ้งหนี้ทางอีเมล</a>
                                             </div>
                                         </div>

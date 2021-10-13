@@ -14,7 +14,7 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <h1 class="text-left ">ใบเเจ้งหนี้</h1>
                 <p class="text-left">จัดการ/ใบเเจ้งหนี้</p>
-                <p class="text-green"> {{ Session::get('messageEmail') }}</p>
+                <p class="text-green" id="messageEmail"></p>
             </li>
         </ul>
     </nav>
@@ -168,7 +168,7 @@
                                                                             <td>{{$user->name}}</td>
                                                                             <td></td>
                                                                             <td>{{$user->totalItems}}</td>
-                                                                            <td></td>
+                                                                            <td>{{$user->email}}</td>
                                                                             <td>{{$user->vat}}</td>
                                                                             <td>{{$user->netTotal}}</td>
                                                                             <td></td>
@@ -192,7 +192,7 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <a  href="{{url('get-mail')}}"
+                                                <a  id="getMail"
                                                     class="btn btn-danger box-inv">ส่งใบเเจ้งหนี้ทางอีเมล</a>
                                             </div>
                                         </div>
