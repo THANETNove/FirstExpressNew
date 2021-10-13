@@ -6,38 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>First Express</title>
     <style>
-    @font-face {
-        font-family: 'THSarabunNew';
-        font-style: normal;
-        font-weight: normal;
-        src: url("{{ public_path('fonts/THSarabunNew.ttf') }}") format('truetype');
-    }
-
-    @font-face {
-        font-family: 'THSarabunNew';
-        font-style: normal;
-        font-weight: bold;
-        src: url("{{ public_path('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
-    }
-
-    @font-face {
-        font-family: 'THSarabunNew';
-        font-style: italic;
-        font-weight: normal;
-        src: url("{{ public_path('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
-    }
-
-    @font-face {
-        font-family: 'THSarabunNew';
-        font-style: italic;
-        font-weight: bold;
-        src: url("{{ public_path('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
-    }
-
-    body {
-        font-family: "THSarabunNew";
-    }
-
 
     .invoice {
         position: absolute;
@@ -199,7 +167,7 @@
 
     .child3 {
         position: static;
-        border: 1px solid red;
+
         top: 0px;
         margin-left: 400px;
     }
@@ -217,7 +185,6 @@
 
     .child2 {
         position: relative;
-        border: 1px solid red;
         top: -200px;
         margin-right: 310px;
         text-align: center;
@@ -248,59 +215,9 @@
         <p class="text-charged">[จังหวัด รหัสไปรษณีย์]</p>
         <p class="text-charged">[หมายเลขโทรศัพท์]</p>
         <p class="text-charged">[ที่อยู่อิเมล]</p>
+        </div>
+    </div>
 
-        <p class="invoice">ใบเเจ้งหนี้</p>
-        <p class="document-number">หมายเลขเอกสาร</p>
-        <p class="document-anuses">{{$documentThat}}</p>
-        <p class="date">วันที่</p>
-        <p class="date-anuses">{{$dateDue}}</p>
-        <p class="customer">ID ลูกค้า</p>
-        <p class="customer-id">{{$id}}</p>
-        <p class="agreement">ข้อตกลง</p>
-        <p class="agreement-text">ครบกำหนดเมื่อได้รับ</p>
-
-        <p class="description">คำอธิบาย</p>
-        <p class="amount">ปริมาณ</p>
-        <p class="unit-price">ราคาต่อหน่วย</p>
-        <p class="amount-baht">จำนวนเงิน</p>
-        <div class="description-text">
-            <p class="text-margin">ค่าบริการ</p>
-            <p class="text-margin">เเรงงาน: 5 ชั่วโมง ฺ฿ 75/ ชั่วโมง</p>
-            <p class="text-margin">ส่วนลดของ</p>
-        </div>
-        <div class="amount-text">
-            <p class="text-margin">1</p>
-            <p class="text-margin">5</p>
-            <p class="text-margin">-</p>
-        </div>
-        <div class="unit-price-text">
-            <p class="text-margin">2,010,000.00</p>
-            <p class="text-margin">750.00</p>
-            <p class="text-margin">70.00</p>
-        </div>
-        <div class="amount-baht-text">
-            <p class="text-margin">2,010,000.00</p>
-            <p class="text-margin">750.00</p>
-            <p class="text-margin">70.00</p>
-        </div>
-    </div>
-    <div class="child3">
-        <div class="child3-text ">
-            <p class="text-margin">ผลร่วมย่อย</p>
-            <p class="text-margin">อัตราภาษี</p>
-            <p class="text-margin">ภาษี</p>
-            <h3 class="text-margin">ผลรวม</h3>
-        </div>
-        <div class="child3-baht">
-            <p class="text-margin">2,010,000.00 บาท</p>
-            <p class="text-margin">750.00 บาท</p>
-            <p class="text-margin">70.00 บาท</p>
-            <h3 class="text-margin"> 50,000,000.00 บาท</h3>
-        </div>
-    </div>
-    <div class="child2">
-        <h3>ขอบคุณที่ร่วมทำธุระกิจกับเรา!</h3>
-    </div>
     <div class="child4">
         <h4>ถ้าคุณมีคำถามเกี่ยวใบเเจ้งหนี้นี้โปรติดต่อ</h4>
         <h3>ชื่อ หมายเลขโทรศัพท์ email@address.com</h3>

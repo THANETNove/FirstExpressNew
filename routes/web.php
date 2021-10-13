@@ -46,7 +46,7 @@ use App\mail\EmailFirstExpress;
 
 
             $details = [
-                'title' => 'Mail from ItSolutionStuff.com',
+                'title' => 'Mail from FirstExpress.com',
                 'body' => 'This is for testing email using smtp'
             ];
 
