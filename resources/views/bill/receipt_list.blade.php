@@ -47,7 +47,7 @@
                                         <!-- Default box -->
                                         <div class="card">
                                             <div class="card-header">
-                                                <form method="POST" action="list-charge">
+                                                <form method="POST" action="receipt-list">
                                                     @csrf
                                                     <div class="container">
                                                         <div class="row">
@@ -219,7 +219,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="list-charge">
+                <form method="POST" action="receipt-list">
                     @csrf
                     <div class="container">
                         <div class="row">

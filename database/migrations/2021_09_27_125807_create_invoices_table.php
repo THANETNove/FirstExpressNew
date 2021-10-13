@@ -30,6 +30,7 @@ class CreateInvoicesTable extends Migration
             $table->string('status');
             $table->string('emailing');
             $table->string('dateInvoice');
+            $table->string('invInvoice');
             $table->timestamps();
         });
     }

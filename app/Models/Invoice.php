@@ -24,6 +24,7 @@ class Invoice extends Model
         'netTotal',
         'status',
         'emailing',
+        'invInvoice',
         'dateInvoice'
     ];
 

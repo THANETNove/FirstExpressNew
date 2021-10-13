@@ -9,11 +9,9 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PriceAdjustmentController;
 use App\Http\Controllers\setUp_UsersController;
 use App\Http\Controllers\ManageListController;
+use App\Http\Controllers\GetEmailController;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Models\Invoice;
 
-use App\mail\EmailFirstExpress;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,38 +25,6 @@ use App\mail\EmailFirstExpress;
 */
 
 
-function GetDataUPdate($key)
-{
-            $nowTimeDate = Carbon::now();
-            $newTime = Carbon::now()->subMinutes(7);
-            $date = $nowTimeDate->format('Y-m-d');
-
-            $addIn = Invoice::find($key);
-            $addIn->dateInvoice =  $date;
-            $addIn->save();
-}
-
-
- function GetEmail($key)
-{
-
-            $bill = DB::table('customers')
-            ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
-            ->orderBy('invoices.id', 'asc')
-            ->where("invoices.id", $key)
-            ->get();
-
-            $mailUsr = $bill[0]->email;
-
-
-            $details = [
-                'title' => 'Mail from FirstExpress.com',
-                'body' => 'This is for testing email using smtp'
-            ];
-
-            \Mail::to($mailUsr)->send(new \App\Mail\EmailFirstExpress($details));
-           
-}
 
 
 Route::get('/', function () {
@@ -69,56 +35,6 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::post('/get-mailGroup', function (Request $request) {
-    
-    $idMail = $request->idView;
-
-    $result = array();
-    foreach ($idMail as $element) {
-        $result[$element] = $element;
-    }
-
-   
-    foreach($result as $key) {
-       
-        GetEmail($key);
-        GetDataUPdate($key);
-    }
-
-
-    return response()->json(['messageEmail'=>'ส่ง Gmail เรียบร้อย']);
-
-});
-
-Route::post('/get-mailGroupTwo', function (Request $request) {
-    
-    $idMail = $request->idView;
-
-    $result = array();
-    foreach ($idMail as $element) {
-        $result[$element] = $element;
-    }
-
-   
-    foreach($result as $key) {
-       
-        GetEmail($key);
-    }
-
-
-    return response()->json(['messageEmail'=>'ส่ง Gmail เรียบร้อย']);
-
-}); 
-
-Route::get('/get-mail/{id}', function ($id) {
-    
-    $key = $id;
- 
-    GetEmail($key);
-    GetDataUPdate($key);
-    return redirect('list-charge')->with('messageEmail', 'ส่ง Gmail เรียบร้อย' );
-
-}); 
 
 
 
@@ -181,6 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/charge/{id}', [InvoiceController::class, 'charge']);
     Route::get('/export-excel', [InvoiceController::class, 'export']);
     Route::get('/receipt-list', [InvoiceController::class, 'receipt_list']);
+    Route::post('/receipt-list', [InvoiceController::class, 'receipt_list']);
 });
 
 
@@ -199,6 +116,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/api-getLabel', [ManageListController::class, 'getLabel']);
     Route::get('/api-cancelOrder', [ManageListController::class, 'cancelOrder']);
     Route::get('/export_excel/excel', [ManageListController::class, 'excel'])->name('export_excel');
+});
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/get-mailGroup', [GetEmailController::class,'GetMailGroup']);
+    Route::post('/get-mailGroupTwo', [GetEmailController::class,'GetMailGroupTwo']);
+    Route::get('/get-mail/{id}', [GetEmailController::class,'GetMail']);
 });
 
 

@@ -383,6 +383,7 @@ class InvoiceController extends Controller
             'status' =>  'due',
             'emailing' =>  'Sent',
             'dateInvoice' =>  'Null',
+            'invInvoice' =>  'INV-',
             
         ]);
 
