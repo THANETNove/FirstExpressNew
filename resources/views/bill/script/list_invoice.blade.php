@@ -53,10 +53,10 @@ function clickInvoice() {
 
 
 
-let idView = [];
-function viewInvoice() {
 
-$('.click').each(function() {
+
+$('.click').click(function() {
+    let idView = [];
     let checked = $(this)[0].checked;
     if (checked === true) {
 
@@ -66,33 +66,29 @@ $('.click').each(function() {
 
     }
 
+    let id = idView[0];
+    if (id != undefined) {
+        //console.log('tt',id);
 
-});
-
-        console.log("id",idView);
-/*jQuery.ajax/({
-    url: "{{ url('/update-status') }}",
-    method: 'post',
-    data: {
-        "_token": "{{ csrf_token() }}",
-        idView,
-
-    },
-    success: function(data) {
-        valid = data.status;
-      
-        location.replace("list-invoice");
-
-
-    },
-    error: function(data) {
-        
-       $("#errorCheckbox").html('กรุณากด Click Checkbox');
+        let url = `<a  class="text-red"  id="clickNew" href="{{url('list-createPDF/${id}')}}"   target="_blank" >ดูตัวอย่างใบเเจ้งหนี้</a>`;
+       
+        document.getElementById("clickNew").innerHTML = url;
+    }else{
+        document.getElementById("clickNew").innerHTML = '<a  class="text-red"  id="clickNew"    >ดูตัวอย่างใบเเจ้งหนี้</a>';
     }
 
-});*/
+});
+/*
+        if (idView.length > 0 && idView.length < 2) {
+            console.log("id",idView);
+        }else {
+            //console.log("id,kss",idView);
+            $("#errorClick").html('กดเลือกได้ที่ละ 1 บิล');
+        }*/
 
 
 
-}
+
+
+
 </script>

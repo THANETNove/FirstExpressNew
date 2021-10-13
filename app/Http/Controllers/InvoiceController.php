@@ -376,17 +376,18 @@ class InvoiceController extends Controller
     }
 
 
-    public function down()
-    {
-        Schema::dropIfExists('employees');
-    }
 
     public function createPDF($id) {
+       
+
+       // dd($id);
         // retreive all records from db
         $data = $addIn = Invoice::find($id);
         // share data to view
+
+        //dd($data);
         view()->share('employee',$data);
-        $pdf = PDF::loadView('bill.pdf', $data);
+        $pdf = PDF::loadView('bill.invoicePDF', $data);
   
         // download PDF file with download method
         return $pdf->stream('pdf_file.pdf');

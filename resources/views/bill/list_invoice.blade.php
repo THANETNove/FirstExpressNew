@@ -63,6 +63,8 @@
                                                                             </option>
                                                                             @endforeach
                                                                         </select>
+                                                                        <br>
+                                                                        <p id="errorClick" class="text-red"></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -179,8 +181,7 @@
                                                     class="btn btn-danger box-inv_to " data-bs-toggle="modal" data-bs-target="#exampleModal" >ยันยันออกใบเเจ้งหนี้</button>
 
 
-                                                <button  type="button" onclick="viewInvoice()"
-                                                    class="btn btn-outline-danger box-inv" > ดูตัวอย่างใบเเจ้งหนี้</button>
+                                                <a   class="btn btn-outline-danger box-inv" id="clickNew" > ดูตัวอย่างใบเเจ้งหนี้</a>
 
 
                                             </div>
