@@ -14,7 +14,7 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <h1 class="text-left ">ใบเเจ้งหนี้</h1>
                 <p class="text-left">จัดการ/ใบเเจ้งหนี้</p>
-                <p class="text-green" id="messageEmail"></p>
+                <p class="text-green" id="messageEmail"> {{ Session::get('messageEmail') }}</p>
             </li>
         </ul>
     </nav>
@@ -179,7 +179,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <a class="btn btn-secondary"
-                                                                                    href="{{url('#',$user->id)}}">เเจ้งชำระ</a>
+                                                                                    href="{{url('get-mail',$user->id)}}">เเจ้งชำระ</a>
                                                                             </td>
                                                                         </tr>
                                                                         @endforeach

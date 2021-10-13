@@ -83,7 +83,7 @@ $('.click-cha').click(function() {
 
 $("#getMail").click(function() {
     jQuery.ajax({
-        url: "{{ url('get-mail') }}",
+        url: "{{ url('get-mailGroup') }}",
         method: 'post',
         data: {
             "_token": "{{ csrf_token() }}",
@@ -95,7 +95,7 @@ $("#getMail").click(function() {
 
             console.log(valid);
             $("#messageEmail").html(valid);
-            //location.replace("list-invoice");
+            location.replace("list-charge");
 
 
         },

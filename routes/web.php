@@ -26,6 +26,39 @@ use App\mail\EmailFirstExpress;
 |
 */
 
+
+ function GetEmail($key)
+{
+
+
+
+            $nowTimeDate = Carbon::now();
+            $newTime = Carbon::now()->subMinutes(7);
+            $date = $nowTimeDate->format('Y-m-d');
+
+            $bill = DB::table('customers')
+            ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+            ->orderBy('invoices.id', 'asc')
+            ->where("invoices.id", $key)
+            ->get();
+
+            $mailUsr = $bill[0]->email;
+
+
+            $details = [
+                'title' => 'Mail from ItSolutionStuff.com',
+                'body' => 'This is for testing email using smtp'
+            ];
+
+            \Mail::to($mailUsr)->send(new \App\Mail\EmailFirstExpress($details));
+
+
+            $addIn = Invoice::find($key);
+            $addIn->dateInvoice =  $date;
+            $addIn->save();
+}
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,7 +67,7 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::post('/get-mail', function (Request $request) {
+Route::post('/get-mailGroup', function (Request $request) {
     
     $idMail = $request->idView;
  
@@ -43,41 +76,28 @@ Route::post('/get-mail', function (Request $request) {
         $result[$element] = $element;
     }
 
-    $nowTimeDate = Carbon::now();
-    $newTime = Carbon::now()->subMinutes(7);
-    $date = $nowTimeDate->format('Y-m-d');
-
-    
+   
 
 
-   foreach ($result as $key) {
-            $bill = DB::table('customers')
-                ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
-                ->orderBy('invoices.id', 'asc')
-                ->where("invoices.id", $key)
-                ->get();
-
-                $mailUsr = $bill[0]->email;
-
-
-                $details = [
-                    'title' => 'Mail from ItSolutionStuff.com',
-                    'body' => 'This is for testing email using smtp'
-                ];
-               
-                \Mail::to($mailUsr)->send(new \App\Mail\EmailFirstExpress($details));
-
-
-                $addIn = Invoice::find($key);
-                $addIn->emailing = 'Payment';
-                $addIn->dateInvoice =  $date;
-                $addIn->save();
-
+    foreach($result as $key) {
+       
+        GetEmail($key);
     }
-    
+
+   
+
     return response()->json(['messageEmail'=>'ส่ง Gmail เรียบร้อย']);
 
+}); 
 
+Route::get('/get-mail/{id}', function ($id) {
+    
+    $key = $id;
+ 
+    GetEmail($key);
+    
+    return redirect('list-charge')->with('messageEmail', 'ส่ง Gmail เรียบร้อย' );
+    
 
 }); 
 
