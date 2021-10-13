@@ -72,7 +72,7 @@
                             <a href="{{ url('list-invoice') }}" class="nav-link  check-path "
                                 data-parent="#menu-parent-3" data-path="list-invoice">
                                 <p href="widgets.html" class="text-left-no">
-                                    วางบิล
+                                ออกใบแจ้งหนี้
                                 </p>
                             </a>
                         </li>
@@ -80,7 +80,7 @@
                             <a class="nav-link check-path" data-path="list-charge" data-parent="#menu-parent-3"
                                 href="{{ url('list-charge') }}">
                                 <p class="text-left-no">
-                                    ใบเเจ้งหนี้
+                                รายการใบแจ้งหนี้
                                 </p>
                             </a>
                         </li>
@@ -88,7 +88,7 @@
                             <a class="nav-link check-path" data-path="receipt-list" data-parent="#menu-parent-3"
                                 href="{{ url('receipt-list') }}">
                                 <p class="text-left-no">
-                                    ออกใบเสร็จ
+                                รายการใบเสร็จ
                                 </p>
                             </a>
                         </li>

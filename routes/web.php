@@ -10,6 +10,8 @@ use App\Http\Controllers\PriceAdjustmentController;
 use App\Http\Controllers\setUp_UsersController;
 use App\Http\Controllers\ManageListController;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Invoice;
 
 use App\mail\EmailFirstExpress;
 
@@ -41,6 +43,11 @@ Route::post('/get-mail', function (Request $request) {
         $result[$element] = $element;
     }
 
+    $nowTimeDate = Carbon::now();
+    $newTime = Carbon::now()->subMinutes(7);
+    $date = $nowTimeDate->format('Y-m-d');
+
+    
 
 
    foreach ($result as $key) {
@@ -59,6 +66,12 @@ Route::post('/get-mail', function (Request $request) {
                 ];
                
                 \Mail::to($mailUsr)->send(new \App\Mail\EmailFirstExpress($details));
+
+
+                $addIn = Invoice::find($key);
+                $addIn->emailing = 'Payment';
+                $addIn->dateInvoice =  $date;
+                $addIn->save();
 
     }
     

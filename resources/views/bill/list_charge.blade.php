@@ -171,7 +171,7 @@
                                                                             <td>{{$user->email}}</td>
                                                                             <td>{{$user->vat}}</td>
                                                                             <td>{{$user->netTotal}}</td>
-                                                                            <td></td>
+                                                                            <td>{{$user->emailing}}</td>
                                                                             <td>
                                                                                 <p class="text-red">
                                                                                     {{$user->status}}

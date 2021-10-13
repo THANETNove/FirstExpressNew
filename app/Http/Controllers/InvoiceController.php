@@ -181,6 +181,7 @@ class InvoiceController extends Controller
                     $billData = DB::table('customers')
                     ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
                     ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '=', 'Null')
                     ->where('issuedDateIssue','>=', $dateOut)
                     ->where('dateDue','<=', $dateEnd)
                     ->orderBy('invoices.id', 'asc')
@@ -191,6 +192,7 @@ class InvoiceController extends Controller
                     $billData = DB::table('customers')
                     ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
                     ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '=', 'Null')
                     ->where('issuedDateIssue','>=', $dateOut)
                     ->where('dateDue','<=', $dateEnd)
                     ->where("name", 'LIKE', '%'.$name. '%')
@@ -204,6 +206,7 @@ class InvoiceController extends Controller
                     ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
                     ->where("name", 'LIKE', '%'.$search. '%')
                     ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '=', 'Null')
                     ->orderBy('invoices.id', 'asc')
                     ->get();
 
@@ -213,6 +216,7 @@ class InvoiceController extends Controller
                     ->where("name", 'LIKE', '%'.$name. '%')
                     ->orWhere("documentThat", 'LIKE', '%'.$documentThat. '%')
                     ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '=', 'Null')
                     ->orderBy('invoices.id', 'asc')
                     ->get();
                 }else{
@@ -220,6 +224,7 @@ class InvoiceController extends Controller
                     $billData = DB::table('customers')
                     ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
                     ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '=', 'Null')
                     ->orderBy('invoices.id', 'asc')
                     ->get();
                 }
@@ -232,6 +237,7 @@ class InvoiceController extends Controller
             ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
             ->orderBy('invoices.id', 'asc')
             ->where("status", '=', 'Unpaid')
+            ->where("dateInvoice", '=', 'Null')
             ->get();
            
         }
@@ -266,6 +272,8 @@ class InvoiceController extends Controller
             'vat' => $request['vat'],
             'netTotal' => $request['netTotal'],
             'status' =>  'due',
+            'emailing' =>  'Sent',
+            'dateInvoice' =>  'Null',
             
         ]);
 

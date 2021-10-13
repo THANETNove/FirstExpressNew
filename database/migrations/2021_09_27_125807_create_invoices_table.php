@@ -28,6 +28,8 @@ class CreateInvoicesTable extends Migration
             $table->string('vat');
             $table->string('netTotal');
             $table->string('status');
+            $table->string('emailing');
+            $table->string('dateInvoice');
             $table->timestamps();
         });
     }

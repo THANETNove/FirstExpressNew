@@ -22,7 +22,9 @@ class Invoice extends Model
         'priceGoods',
         'vat',
         'netTotal',
-        'status'
+        'status',
+        'emailing',
+        'dateInvoice'
     ];
 
 
