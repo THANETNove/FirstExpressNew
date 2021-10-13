@@ -8,7 +8,9 @@ use App\Models\Invoice;
 use Illuminate\Support\Facades\DB;
 use App\Models\Flight;
 use PDF;
-
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class InvoiceController extends Controller
@@ -393,6 +395,33 @@ class InvoiceController extends Controller
         return $pdf->stream('pdf_file.pdf');
       }
 
+
+
+           
+    public function charge($id)
+    {
+
+        $data  = Invoice::find($id);
+        return view('bill.charge' ,$data);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+       }
+  
+
+
+  
+
+
+     
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+ 
+
+    
     /**
      * Remove the specified resource from storage.
      *

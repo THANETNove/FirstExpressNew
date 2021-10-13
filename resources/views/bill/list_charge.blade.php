@@ -14,6 +14,7 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <h1 class="text-left ">ใบเเจ้งหนี้</h1>
                 <p class="text-left">จัดการ/ใบเเจ้งหนี้</p>
+                <p class="text-green"> {{ Session::get('messageEmail') }}</p>
             </li>
         </ul>
     </nav>
@@ -191,8 +192,8 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <button type="button"
-                                                    class="btn btn-danger box-inv">ส่งใบเเจ้งหนี้ทางอีเมล</button>
+                                                <a  href="{{url('get-mail')}}"
+                                                    class="btn btn-danger box-inv">ส่งใบเเจ้งหนี้ทางอีเมล</a>
                                             </div>
                                         </div>
                                     </section>

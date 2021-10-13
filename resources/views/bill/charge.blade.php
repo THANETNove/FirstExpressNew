@@ -37,7 +37,7 @@
                             <p>[จังหวัด รหัสไปรษณีย์]</p>
                             <p>[หมายเลขโทรศัพท์ (000) 000-0000]</p>
                             <h5 class="charge-box col-sm-12 col-md-5">เรียกเก็บไปยัง:</h5>
-                            <p>[ชื่อ]</p>
+                            <p>[{{$name}}]</p>
                             <p>[ชื่อบริษัท]</p>
                             <p>[ที่อยู่]</p>
                             <p>[จังหวัด รหัสไปรษณีย์]</p>
@@ -52,7 +52,7 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group thickeb">
                                             <p class="text-center charge-box">หมายเลขเอกสาร</p>
-                                            <p class="text-center thickeb">2034</p>
+                                            <p class="text-center thickeb">{{$documentThat}}</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
@@ -64,7 +64,7 @@
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group thickeb">
                                             <p class="text-center charge-box">ID ลูกค้า</p>
-                                            <p class="text-center thickeb">564</p>
+                                            <p class="text-center thickeb">{{$id}}</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">

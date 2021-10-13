@@ -25,6 +25,7 @@ class Invoice extends Model
         'status'
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -48,4 +49,9 @@ class Invoice extends Model
 
     protected $table = 'invoices';
     protected $primaryKey = 'id';
+
+    public function collection()
+    {
+        return Invoice::all();
+    }
 }

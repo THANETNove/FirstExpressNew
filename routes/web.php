@@ -11,6 +11,7 @@ use App\Http\Controllers\setUp_UsersController;
 use App\Http\Controllers\ManageListController;
 use Illuminate\Http\Request;
 
+use App\mail\EmailFirstExpress;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,25 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('auth.register');
 });
+
+Route::get('/get-mail', function () {
+  
+
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+    \Mail::to('lollipopwar-love@hotmail.co.th')->send(new \App\Mail\EmailFirstExpress($details));
+   
+
+    return redirect('/receipt-list')->with('messageEmail', 'ส่ง Gmail เรียบร้อย' );
+    
+
+
+}); 
+
 
 
 Auth::routes();
@@ -67,7 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/parcel-number', [DesktopController::class, 'parcel_number']);
     Route::get('/invoice', [DesktopController::class, 'invoice']);
     Route::get('/receipt-list', [DesktopController::class, 'receipt_list']);
-    Route::get('/charge', [DesktopController::class, 'charge']);
     Route::get('/cell-commission', [DesktopController::class, 'cell_commission']);
     Route::get('/list-cellCommission', [DesktopController::class, 'list_cellCommission']);
     Route::get('/cost-price', [DesktopController::class, 'costPrice']);
@@ -89,6 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/list-charge', [InvoiceController::class, 'list_charge']);
     Route::post('/list-charge', [InvoiceController::class, 'list_charge']);
     Route::get('/list-createPDF/{id}', [InvoiceController::class, 'createPDF']);
+    Route::get('/charge/{id}', [InvoiceController::class, 'charge']);
+    Route::get('/export-excel', [InvoiceController::class, 'export']);
 });
 
 

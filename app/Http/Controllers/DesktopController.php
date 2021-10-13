@@ -80,11 +80,6 @@ class DesktopController extends Controller
 
     
    
-     
-    public function charge()
-    {
-        return view('invoice.charge');
-    }
 
        
    

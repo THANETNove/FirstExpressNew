@@ -191,7 +191,7 @@
                                                                             <td>18-08-2021</td>
                                                                             <td><p class="text-green">ยืนยันแล้ว</p></td>
                                                                         </tr>
-                                                                        tr class="odd">
+                                                                        <tr class="odd">
                                                                             <td>
                                                                                 <div class="text-center">
                                                                                     <input class="form-check-input"
@@ -256,19 +256,19 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="mb-3 row">
-                                            <p for="inputPassword" class="col-sm-5 col-form-label">วันที่สร้างรายการ</p>
+                                            <p for="inputPassword" class="col-sm-5 col-form-label">วันที่สร้างรายการโอน</p>
                                             <div class="col-sm-7">
                                                 <input type="text" id="datepicker01" class="form-control datepicker">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <p for="inputPassword" class="col-sm-5 col-form-label">วันที่สร้างรายการ</p>
+                                            <p for="inputPassword" class="col-sm-5 col-form-label">วันที่โอนคืน</p>
                                             <div class="col-sm-7">
                                                 <input type="text" id="datepicker02" class="form-control datepicker">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <p for="inputPassword" class="col-sm-5 col-form-label">วันที่สร้างรายการ</p>
+                                            <p for="inputPassword" class="col-sm-5 col-form-label">วันที่ออกใบเสร็จ</p>
                                             <div class="col-sm-7">
                                                 <input type="text" id="datepicker03" class="form-control datepicker">
                                             </div>
@@ -314,7 +314,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-7">
                             <div class="mb-3 row">
-                                <p class="col-sm-3">วันที่สร้างรายการ</p>
+                                <p class="col-sm-3">ชื่อ-นามสกุล :</p>
                                 <div class="col-sm-9">
                                     <select class="form-control" aria-label="Default select example">
                                         <option selected></option>
@@ -325,7 +325,18 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <p class="col-sm-3">วันที่สร้างรายการ</p>
+                                <p class="col-sm-3">เลือกประเภทการนำเข้าไฟล์</p>
+                                <div class="col-sm-9">
+                                    <select class="form-control" aria-label="Default select example">
+                                        <option ></option>
+                                        <option value="1"></option>
+                                        <option value="2"></option>
+                                        <option value="3"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <p class="col-sm-3">เลขใบแจ้งหนี้ :</p>
                                 <div class="col-sm-9">
                                     <select class="form-control" aria-label="Default select example">
                                         <option selected></option>
@@ -336,7 +347,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <p class="col-sm-3">วันที่สร้างรายการ</p>
+                                <p class="col-sm-3">สถานะการโอนคืน :</p>
                                 <div class="col-sm-9">
                                     <select class="form-control" aria-label="Default select example">
                                         <option selected></option>

@@ -101,26 +101,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('manage-customer-information') }}" class="nav-link check-path"
-                                data-parent="#menu-parent-3" data-path="manage-customer-information">
+                            <a href="{{ url('/list-cellCommission') }}" class="nav-link check-path" data-parent="#menu-parent-3"
+                                data-path="list-cellCommission">
                                 <p class="text-left-no">
-                                    จัดการข้อมูลลูกค้า
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/COD-Refund') }}" class="nav-link check-path" data-parent="#menu-parent-3"
-                                data-path="COD-Refund">
-                                <p class="text-left-no">
-                                    จัดการโอนเงินคืน COD
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('manage-customer') }}" class="nav-link check-path"
-                                data-parent="#menu-parent-3" data-path="manage-customer">
-                                <p class="text-left-no">
-                                    ลูกค้า
+                                    จัดการ COD
                                 </p>
                             </a>
                         </li>

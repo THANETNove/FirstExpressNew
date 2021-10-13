@@ -14,6 +14,7 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <h1 class="text-left ">รายการใบเสร็จ</h1>
                 <p class="text-left">จัดการ/รายการใบเสร็จ</p>
+                <p class="text-green"> {{ Session::get('messageEmail') }}</p>
             </li>
         </ul>
     </nav>
@@ -47,9 +48,6 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="card-tools">
-                                                    <a href="{{url('charge')}}" class="btn btn-danger ">เพิ่มใบเเจ้งหนี้
-                                                        <i class="fas fa-plus-square text-left white-icon"></i>
-                                                    </a>
                                                 </div>
                                                 <div class="container">
                                                     <div class="row">
@@ -181,8 +179,8 @@
                                                 </div>
                                                 <br>
                                                 <br>
-                                                <button type="button"
-                                                    class="btn btn-danger box-inv">ส่งใบเเจ้งหนี้ทางอีเมล</button>
+                                                <a  href="{{url('get-mail')}}" 
+                                                    class="btn btn-danger box-inv">ส่งใบเเจ้งหนี้ทางอีเมล</a>
                                             </div>
                                         </div>
                                     </section>

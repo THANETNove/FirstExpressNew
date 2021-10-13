@@ -47,7 +47,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                             <div class="card-tools">
-                                                    <a href="{{url('list-cellCommission')}}" class="btn btn-danger " >สั่งออกไฟล์ Elsx
+                                                    <a href="{{url('export-excel')}}" class="btn btn-danger " >สั่งออกไฟล์ Elsx
                                                         <i class="fas fa-file-excel text-left white-icon"></i>
                                                     </a>
                                                 </div>
