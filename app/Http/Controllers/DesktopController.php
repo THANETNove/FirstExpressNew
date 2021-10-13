@@ -84,11 +84,7 @@ class DesktopController extends Controller
        
    
 
-    public function receipt_list()
-    {
-        return view('invoice.receipt_list');
-    }
-
+ 
     
     public function cell_commission()
     {

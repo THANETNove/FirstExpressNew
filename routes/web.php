@@ -27,14 +27,20 @@ use App\mail\EmailFirstExpress;
 */
 
 
- function GetEmail($key)
+function GetDataUPdate($key)
 {
-
-
-
             $nowTimeDate = Carbon::now();
             $newTime = Carbon::now()->subMinutes(7);
             $date = $nowTimeDate->format('Y-m-d');
+
+            $addIn = Invoice::find($key);
+            $addIn->dateInvoice =  $date;
+            $addIn->save();
+}
+
+
+ function GetEmail($key)
+{
 
             $bill = DB::table('customers')
             ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
@@ -51,11 +57,7 @@ use App\mail\EmailFirstExpress;
             ];
 
             \Mail::to($mailUsr)->send(new \App\Mail\EmailFirstExpress($details));
-
-
-            $addIn = Invoice::find($key);
-            $addIn->dateInvoice =  $date;
-            $addIn->save();
+           
 }
 
 
@@ -70,21 +72,39 @@ Route::get('/register', function () {
 Route::post('/get-mailGroup', function (Request $request) {
     
     $idMail = $request->idView;
- 
+
     $result = array();
     foreach ($idMail as $element) {
         $result[$element] = $element;
     }
 
    
+    foreach($result as $key) {
+       
+        GetEmail($key);
+        GetDataUPdate($key);
+    }
 
 
+    return response()->json(['messageEmail'=>'ส่ง Gmail เรียบร้อย']);
+
+});
+
+Route::post('/get-mailGroupTwo', function (Request $request) {
+    
+    $idMail = $request->idView;
+
+    $result = array();
+    foreach ($idMail as $element) {
+        $result[$element] = $element;
+    }
+
+   
     foreach($result as $key) {
        
         GetEmail($key);
     }
 
-   
 
     return response()->json(['messageEmail'=>'ส่ง Gmail เรียบร้อย']);
 
@@ -95,11 +115,11 @@ Route::get('/get-mail/{id}', function ($id) {
     $key = $id;
  
     GetEmail($key);
-    
+    GetDataUPdate($key);
     return redirect('list-charge')->with('messageEmail', 'ส่ง Gmail เรียบร้อย' );
-    
 
 }); 
+
 
 
 
@@ -137,7 +157,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/COD-Status', [DesktopController::class, 'cod_status']);
     Route::get('/parcel-number', [DesktopController::class, 'parcel_number']);
     Route::get('/invoice', [DesktopController::class, 'invoice']);
-    Route::get('/receipt-list', [DesktopController::class, 'receipt_list']);
     Route::get('/cell-commission', [DesktopController::class, 'cell_commission']);
     Route::get('/list-cellCommission', [DesktopController::class, 'list_cellCommission']);
     Route::get('/cost-price', [DesktopController::class, 'costPrice']);
@@ -161,6 +180,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/list-createPDF/{id}', [InvoiceController::class, 'createPDF']);
     Route::get('/charge/{id}', [InvoiceController::class, 'charge']);
     Route::get('/export-excel', [InvoiceController::class, 'export']);
+    Route::get('/receipt-list', [InvoiceController::class, 'receipt_list']);
 });
 
 

@@ -249,6 +249,113 @@ class InvoiceController extends Controller
        
     }
 
+    public function receipt_list(Request $request)
+    {
+
+
+        $invoiceName = DB::table('invoices')
+        ->select('name')
+        ->distinct()
+        ->where("status", '=', 'Unpaid')
+        ->get();
+
+        $invoiceDocumentThat = DB::table('invoices')
+        ->select('documentThat')
+        ->distinct()
+        ->where("status", '=', 'Unpaid')
+        ->get();
+
+        $invoiceStatus = DB::table('invoices')
+        ->select('status')
+        ->distinct()
+        ->where("status", '=', 'Unpaid')
+        ->get();
+
+
+        $data = $request->all();
+
+        if ($data) {
+                    $name =   $request->name;
+                    $documentThat = $request->documentThat;
+                    $status = $request->status;
+                    $search = $request->search;
+                    $dateOut = $request->dateOut;
+                    $dateEnd = $request->dateEnd;
+
+
+
+    
+
+                if ($dateOut &&  $dateEnd) {
+                    
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '!=', 'Null')
+                    ->where('issuedDateIssue','>=', $dateOut)
+                    ->where('dateDue','<=', $dateEnd)
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+
+                }else if ( $dateOut &&  $dateEnd &&  $name) {
+
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '!=', 'Null')
+                    ->where('issuedDateIssue','>=', $dateOut)
+                    ->where('dateDue','<=', $dateEnd)
+                    ->where("name", 'LIKE', '%'.$name. '%')
+                    ->orWhere("documentThat", 'LIKE', '%'.$documentThat. '%')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+
+                }else if ($search){
+
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("name", 'LIKE', '%'.$search. '%')
+                    ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '!=', 'Null')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+
+                }else if ($name) {
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("name", 'LIKE', '%'.$name. '%')
+                    ->orWhere("documentThat", 'LIKE', '%'.$documentThat. '%')
+                    ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '!=', 'Null')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+                }else{
+                   
+                    $billData = DB::table('customers')
+                    ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+                    ->where("status", '=', 'Unpaid')
+                    ->where("dateInvoice", '!=', 'Null')
+                    ->orderBy('invoices.id', 'asc')
+                    ->get();
+                }
+
+
+                 
+        }else{
+              
+            $billData = DB::table('customers')
+            ->rightJoin('invoices', 'customers.name_customer', '=', 'invoices.name')
+            ->orderBy('invoices.id', 'asc')
+            ->where("status", '=', 'Unpaid')
+            ->where("dateInvoice", '!=', 'Null')
+            ->get();
+           
+        }
+
+        return view('bill.receipt_list',[ 'invoiceName' => $invoiceName, 'invoiceDocumentThat' => $invoiceDocumentThat , 'invoiceStatus' => $invoiceStatus ,'billData' => $billData]);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

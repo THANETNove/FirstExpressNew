@@ -108,4 +108,31 @@ $("#getMail").click(function() {
 
 });
 
+$("#getMailTwo").click(function() {
+    jQuery.ajax({
+        url: "{{ url('get-mailGroupTwo') }}",
+        method: 'post',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            idView,
+
+        },
+        success: function(data) {
+            valid = data.messageEmail;
+
+            console.log(valid);
+            $("#messageEmail").html(valid);
+            location.replace("receipt-list");
+
+
+        },
+        error: function(data) {
+            
+           $("#errorCheckbox").html('กรุณากด Click Checkbox');
+        }
+
+    });
+
+});
+
 </script>
