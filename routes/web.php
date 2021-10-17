@@ -10,6 +10,7 @@ use App\Http\Controllers\PriceAdjustmentController;
 use App\Http\Controllers\setUp_UsersController;
 use App\Http\Controllers\ManageListController;
 use App\Http\Controllers\GetEmailController;
+use App\Http\Controllers\TransportationController;
 use Illuminate\Http\Request;
 
 
@@ -73,7 +74,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/COD-Status', [DesktopController::class, 'cod_status']);
     Route::get('/parcel-number', [DesktopController::class, 'parcel_number']);
     Route::get('/invoice', [DesktopController::class, 'invoice']);
-    Route::get('/cell-commission', [DesktopController::class, 'cell_commission']);
     Route::get('/list-cellCommission', [DesktopController::class, 'list_cellCommission']);
     Route::get('/cost-price', [DesktopController::class, 'costPrice']);
     Route::get('/manage-customer-information', [DesktopController::class, 'manageCustomerInformation']);
@@ -98,6 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/export-excel', [InvoiceController::class, 'export']);
     Route::get('/receipt-list', [InvoiceController::class, 'receipt_list']);
     Route::post('/receipt-list', [InvoiceController::class, 'receipt_list']);
+    Route::get('/cell-commission', [InvoiceController::class, 'cell_commission']);
 });
 
 
@@ -111,6 +112,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('/manage-list', ManageListController::class);
+    Route::post('/manage-edit', [ManageListController::class, 'edit']);
+    Route::post('/manage-update', [ManageListController::class, 'update']);
+    Route::get('/manage-destroy/{id}', [ManageListController::class, 'destroy']);
     Route::get('/api-manage', [ManageListController::class, 'apiManageList']);
     Route::get('/api-createOrder', [ManageListController::class, 'createOrder']);
     Route::get('/api-getLabel', [ManageListController::class, 'getLabel']);
@@ -124,6 +128,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/get-mailGroupTwo', [GetEmailController::class,'GetMailGroupTwo']);
     Route::get('/get-mail/{id}', [GetEmailController::class,'GetMail']);
 });
+
+Route::group(['middleware' => 'auth'], function () {
+    //Route::resource('/transport', TransportationController::class);
+   
+});
+
 
 
 

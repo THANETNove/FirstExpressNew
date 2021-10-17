@@ -19,6 +19,9 @@ class CreateSalesTable extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('numberCustomers')->nullable();
+            $table->string('numberParcels')->nullable();
+            $table->string('total')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

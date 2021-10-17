@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\Sale;
 use Illuminate\Support\Facades\DB;
 use App\Models\Flight;
 use PDF;
@@ -20,9 +21,13 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+    
+
     public function index(Request $request)
     {
- 
+     
         $name = $request->name;
         $dataOut = $request->dataOut;//;
         $dataEnd = $request->dataEnd;//;
@@ -356,6 +361,30 @@ class InvoiceController extends Controller
     }
 
 
+
+    public function cell_commission()
+    {
+        
+
+        $invoiceName = DB::table('invoices')
+        ->select('name')
+        ->distinct()
+        ->get();
+
+
+        $salesSale = DB::table('sales')
+       ->get();
+
+      
+
+
+
+       
+        return view('bill.cell_commission', ['invoiceName' => $invoiceName , 'salesSale' =>  $salesSale]);
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -386,6 +415,35 @@ class InvoiceController extends Controller
             'invInvoice' =>  'INV-',
             
         ]);
+
+
+        $getCellCode = DB::table('customers')
+        ->where("name_customer", '=', $request['name'])
+        ->get();
+        $CellCode = $getCellCode[0]->cell_code;
+        
+      
+        $getSale = DB::table('sales')
+        ->where("codeSales", '=',  $CellCode)
+        ->get();
+        $parcelsId =  $getSale[0]->id;
+        $numberParcels =  $getSale[0]->numberParcels;
+
+     
+        if ($numberParcels === null) {
+
+            $numParcels = $request['totalItems'];
+
+        }else{
+            $numParcels = (int)$numberParcels + (int)$request['totalItems'];
+        }
+
+
+        $flightSale = Sale::find($parcelsId);
+        $flightSale->numberParcels = $numParcels;
+        $flightSale->save();
+
+      
 
         return response()->json(['message'=>'บันทึก เรียบร้อย']);
 
@@ -524,8 +582,12 @@ class InvoiceController extends Controller
     }
 
     public function export() 
-    {
-        return Excel::download(new UsersExport, 'users.xlsx');
+    {   
+       // dd(new UsersExport);
+
+       //dd( UsersExport);
+
+        return Excel::download(new UsersExport, 'Sales.xlsx');
        }
   
 

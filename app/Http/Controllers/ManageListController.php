@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transportation;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
+
 
 class ManageListController extends Controller
 {
@@ -14,9 +17,11 @@ class ManageListController extends Controller
      */
     public function index()
     {
-
        
-        return view('managelist.index');
+        $manage = DB::table('transportations')
+        ->get();
+       // dd($manage);
+        return view('managelist.index' , [ 'manage' => $manage]);
     }
 
     /**
@@ -44,7 +49,22 @@ class ManageListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'begin' => ['required', 'string', 'max:255'],
+            'end' => ['required', 'string', 'max:255'],
+        ]);
+       
+        Transportation::create([
+            'conditionName' =>  $request['name'],
+            'begin' => $request['begin'],
+            'end' => $request['end'],
+            'area' => $request['area'],
+            'scheduledTransport' => $request['transport'],
+        ]);
+
+        return redirect('manage-list')->with('message_status', 'เพิ่ม ข้อมูลเรียบร้อย' );
     }
 
     /**
@@ -231,9 +251,12 @@ class ManageListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+           $id =  $request->id;
+           $dataManage = Transportation::find($id);
+          
+           return response()->json(['message'=>  $dataManage]);
     }
 
     /**
@@ -243,9 +266,20 @@ class ManageListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id  = $request->eid;
+  
+    
+        $flight = Transportation::find($id);
+        $flight->conditionName = $request->name;
+        $flight->begin = $request->begin;
+        $flight->end = $request->end;
+        $flight->area = $request->area;
+        $flight->scheduledTransport = $request->transport;
+        $flight->save();
+
+        return redirect('manage-list')->with('message_status', 'เเก้ไข ข้อมูลเรียบร้อย' );
     }
 
     /**
@@ -256,6 +290,11 @@ class ManageListController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        $flightDes = Transportation::find($id);
+
+        $flightDes->delete();
+
+        return redirect('manage-list')->with('messageDestroy', 'ลบ ข้อมูลเรียบร้อย');
     }
 }

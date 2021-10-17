@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Invoice;
+use App\Models\Sale;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class UsersExport implements FromCollection
@@ -12,6 +12,7 @@ class UsersExport implements FromCollection
     */
     public function collection()
     {
-        return Invoice::all();
+            
+        return Sale::all();
     }
 }

@@ -58,7 +58,7 @@
                                                                         วันที่ออกใบเเจ้งหนี้</p>
                                                                     <div class="col-sm-7">
                                                                         <input type="text"
-                                                                            class="form-control datepicker" name="dateOut">
+                                                                            class="form-control datepicker" name="dateOut"  placeholder="2021-10-01">
 
                                                                     </div>
                                                                 </div>
@@ -69,7 +69,7 @@
                                                                         class="col-sm-2 col-form-label">ถึง</label>
                                                                     <div class="col-sm-7">
                                                                         <input type="text"
-                                                                            class="form-control datepicker_out" name="dateEnd">
+                                                                            class="form-control datepicker_out" name="dateEnd"  placeholder="2021-10-01">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -229,7 +229,7 @@
                                         class="col-sm-6 col-form-label">วันที่อกกใบเเจ้งหนี้</label>
                                     <div class="col-sm-6">
                                         <input type="text" id="datepicker" class="form-control datepicker"
-                                            name="dateOut">
+                                            name="dateOut"  placeholder="2021-10-01">
 
                                     </div>
                                     <label for="inputPassword" class="col-sm-6 col-form-label">ลูกค้า</label>
@@ -276,7 +276,7 @@
                                             <label for="inputPassword"
                                                 class="col-sm-2 col-form-label margin-model">ถึง</label>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control datepicker_out" name="dateEnd">
+                                                <input type="text" class="form-control datepicker_out" name="dateEnd"  placeholder="2021-10-01">
                                             </div>
                                         </div>
                                     </div>

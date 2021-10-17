@@ -14,6 +14,9 @@ class Sale extends Model
         'username',
         'email',
         'password',
+        'numberCustomers',
+        'numberParcels',
+        'total',
     ];
 
     /**

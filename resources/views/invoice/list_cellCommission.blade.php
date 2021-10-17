@@ -12,7 +12,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <h1 class="text-left ">คอมมิชชั่นเซลล์</h1>
+                <h1 class="text-left ">COD</h1>
                 <p class="text-left">ข้อมูลคอมมิสชั่นรายเดือน</p>
             </li>
         </ul>

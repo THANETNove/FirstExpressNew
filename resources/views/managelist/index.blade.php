@@ -13,7 +13,12 @@
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <h1 class="text-left ">จัดการรายการ</h1>
-                <p class="text-left">จัดการรายการเเละจัดเเจงขนส่งให้เเต่ละรายการ</p>
+                <p class="text-left">จัดการรายการและจัดแจงขนส่งให้แต่ละรายการ</p>
+                <p class="text-green"> {{ Session::get('message_status') }}</p>
+                <p class="text-red"> {{ Session::get('messageDestroy') }}</p>
+                @foreach ($errors->all() as $error)
+                 <p class="text-red">{{ $error }}</p>
+                  @endforeach
             </li>
         </ul>
     </nav>
@@ -92,7 +97,7 @@
                                                                                     <p class="col-sm-6 ">ช่วงน้ำหนัก
                                                                                         (กก.) :</p>
                                                                                     <div class="col-sm-6">
-                                                                                        <input type="text"
+                                                                                        <input type="number" min="1"
                                                                                             class="form-control"
                                                                                             id="inputPassword"
                                                                                             value="1">
@@ -102,7 +107,7 @@
                                                                             <div class="col">
                                                                                 <div class="mb-3 row">
                                                                                     <div class="col-sm-6">
-                                                                                        <input type="text"
+                                                                                        <input type="number" min="1"
                                                                                             class="form-control"
                                                                                             id="inputPassword"
                                                                                             value="20">
@@ -281,7 +286,7 @@
                                                                                     ขนส่ง
                                                                                 </th>
                                                                                 <th>
-                                                                                
+
                                                                                 </th>
                                                                             </tr>
                                                                         </thead>
@@ -304,8 +309,9 @@
                                                                                 </td>
                                                                                 <td class="text-center">
                                                                                     <a class="btn back-icon"
-                                                                                        href="#d"><i class="fas fa-edit"></i></a>
-                                                                                    
+                                                                                        href="#d"><i
+                                                                                            class="fas fa-edit"></i></a>
+
                                                                                 </td>
                                                                             </tr>
 
@@ -349,6 +355,11 @@
                             data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
                             aria-selected="false">Contact</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-contactEdit-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-contactEdit" type="button" role="tab" aria-controls="pills-contactEdit"
+                            aria-selected="false">Contact</button>
+                    </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
@@ -370,42 +381,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach ($manage as $manage)
                                     <tr>
-                                        <th>พัสดุหนัก</th>
-                                        <td>5.0-10.0</td>
-                                        <td>กรุงเทพ/ปริมฑล</td>
-                                        <td class="text-red">KERRY</td>
+                                        <th>{{$manage->conditionName}}</th>
+                                        <td>{{$manage->begin}}-{{$manage->end}}</td>
+                                        <td>{{$manage->area}}</td>
+                                        <td>
+                                            @if ($manage->scheduledTransport ===  'FLASH')
+                                               <p class="text-orange">{{$manage->scheduledTransport}}</p>
+                                            @else
+                                                <p class="text-red"> {{$manage->scheduledTransport}}</td></p>
+                                            @endif
+                                         </td>   
                                         <td class="text-red">
-                                            <button type="button" class="btn back-icon"><i
-                                                    class="fas fa-pen"></i></button>
-                                            <button type="button" class="btn btn-danger"><i
-                                                    class="fas fa-minus"></i></button>
+                                            <button type="button" class="btn back-icon"  id="idEdit" onclick="contactTabEdit(this.value)"  value="{{$manage->id}}"><i
+                                                    class="fas fa-pen"></i>
+                                                </button>
+                                            <a  class="btn btn-danger"   href="{{ url('manage-destroy', $manage->id) }}"><i
+                                                    class="fas fa-minus"></i></a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>พัสดุเบา</th>
-                                        <td>1.0-4.9</td>
-                                        <td>ต่างจังหวัด</td>
-                                        <td class="text-orange">FLASH</td>
-                                        <td class="text-red">
-                                            <button type="button" class="btn back-icon"><i
-                                                    class="fas fa-pen"></i></button>
-                                            <button type="button" class="btn btn-danger"><i
-                                                    class="fas fa-minus"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>พัสดุหนัก</th>
-                                        <td>1.0-4.9</td>
-                                        <td>ต่างจังหวัด</td>
-                                        <td class="text-orange">FLASH</td>
-                                        <td class="text-red">
-                                            <button type="button" class="btn back-icon"><i
-                                                    class="fas fa-pen"></i></button>
-                                            <button type="button" class="btn btn-danger"><i
-                                                    class="fas fa-minus"></i></button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
@@ -427,64 +423,180 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">เพิ่มเงื่อนไขการขนส่ง</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i
                                     class="fas fa-times-circle dark-icon"></i></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-6">
-                                            <label class="form-label">ชื่อเงื่อนไข</label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                        <div class="mb-6">
-                                            <label class="form-label">ช่วงน้ำหนัก</label>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="text" class="form-control" aria-label="First name">
-                                                </div>-
-                                                <div class="col">
-                                                    <input type="text" class="form-control" aria-label="Last name">
+                        <form method="POST" action=" {{ route('manage-list.store') }}">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-6">
+                                                <label class="form-label">ชื่อเงื่อนไข</label>
+                                                <input type="text"  
+                                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                                    id="exampleFormControlInput1">
+                                            </div>
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                            <div class="mb-6">
+                                                <label class="form-label">ช่วงน้ำหนัก</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="number" min="1" name="begin"  
+                                                            class="form-control @error('begin') is-invalid @enderror"
+                                                            aria-label="First name">
+                                                    </div>-
+                                                    @error('begin')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    <div class="col">
+                                                        <input type="number" min="1" name="end" 
+                                                            class="form-control @error('end') is-invalid @enderror"
+                                                            aria-label="Last name">
+                                                    </div>
+                                                    @error('end')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
                                             </div>
+                                            <div class="mb-6">
+                                                <label class="form-label">พื่นที่</label>
+                                                <select class="form-control" name="area" 
+                                                    aria-label="Default select example">
+                                                    <option value="กรุงเทพ/ปริมฑล">กรุงเทพ/ปริมฑล</option>
+                                                    <option value="ต่างจังหวัด">ต่างจังหวัด</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="mb-6">
+                                                <label class="form-label">กำหนดขนส่ง</label>
+                                                <select class="form-control" name="transport"
+                                                    aria-label="Default select example">
+                                                    <option value="KERRY">KERRY</option>
+                                                    <option value="FLASH">FLASH </option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="mb-6">
-                                            <label class="form-label">พื่นที่</label>
-                                            <select class="form-control" aria-label="Default select example">
-                                                <option selected>ทั้งหมด</option>
-                                                <option value="1">One</option>
-                                            </select>
+                                        <div class="col">
+
                                         </div>
-                                        <br>
-                                        <br>
-                                        <div class="mb-6">
-                                            <label class="form-label">กำหนดขนส่ง</label>
-                                            <select class="form-control" aria-label="Default select example">
-                                                <option selected>KERRY</option>
-                                                <option value="1">One</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger"
-                                onclick="profileTab()">ย้อนกลับ</button>
-                            <button type="button" class="btn btn-danger">บันทึก</button>
-                        </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger"
+                                    onclick="profileTab()">ย้อนกลับ</button>
+                                <button type="submit" class="btn btn-danger">บันทึก</button>
+                            </div>
+                        </form>
                     </div>
+
+                    <div class="tab-pane fade" id="pills-contactEdit" role="tabpanel" aria-labelledby="pills-contactEdit-tab">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">เเก้ไขเงื่อนไขการขนส่ง</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i
+                                    class="fas fa-times-circle dark-icon"></i></button>
+                        </div>
+                        <form method="POST" action=" {{ url('manage-update') }}">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-6">
+                                                <label class="form-label" >ชื่อเงื่อนไข</label>
+                                                <input type="text"
+                                                    class="form-control " name="eid" id="eId" style="display:none;">
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                                    id="eName">
+                                            </div>
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                            <div class="mb-6">
+                                                <label class="form-label">ช่วงน้ำหนัก</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="number" min="1" name="begin"  id="eBegin"
+                                                            class="form-control @error('begin') is-invalid @enderror"
+                                                            aria-label="First name">
+                                                    </div>-
+                                                    @error('begin')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    <div class="col">
+                                                        <input type="number" min="1" name="end" id="eEnd"
+                                                            class="form-control @error('end') is-invalid @enderror"
+                                                            aria-label="Last name">
+                                                    </div>
+                                                    @error('end')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="mb-6">
+                                                <label class="form-label">พื่นที่</label>
+                                                <select class="form-control" name="area" id="eArea"
+                                                    aria-label="Default select example">
+                                                    <option value="กรุงเทพ/ปริมฑล">กรุงเทพ/ปริมฑล</option>
+                                                    <option value="ต่างจังหวัด">ต่างจังหวัด</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="mb-6">
+                                                <label class="form-label">กำหนดขนส่ง</label>
+                                                <select class="form-control" name="transport" id="eTransport"
+                                                    aria-label="Default select example">
+                                                    <option value="KERRY">KERRY</option>
+                                                    <option value="FLASH">FLASH </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger"
+                                    onclick="profileTab()">ย้อนกลับ</button>
+                                <button type="submit" class="btn btn-danger">บันทึก</button>
+                            </div>
+                        </form>
+                    </div>
+
+
                 </div>
             </div>
         </div>

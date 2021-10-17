@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Invoice;
 use Illuminate\Support\Arr;
+use Session;
+
 
 use App\mail\EmailFirstExpress;
 
@@ -15,20 +17,27 @@ class GetEmailController extends Controller
 {
  
 
-    
-public function GetDataUPdate(Request $request, $key)
-{
 
+
+
+    
+public function GetDataUPdate($key)
+{   
+
+
+    
+ 
         $nowTimeDate = Carbon::now();
         $newTime = Carbon::now()->subMinutes(7);
         $date = $nowTimeDate->format('Y-m-d');
 
         $addIn = Invoice::find($key);
         $addIn->dateInvoice =  $date;
+        //$addIn->invInvoice =  'INV-' +  $i;
         $addIn->save();
 }
 
-public function GetEmail(Request $request ,$key)
+public function GetEmail($key)
 {
 
          $bill = DB::table('customers')
@@ -61,8 +70,8 @@ public function GetMailGroup(Request $request)
    
     foreach($result as $key) {
        
-        GetEmail($key);
-        GetDataUPdate($key);
+        $this->GetEmail($key);
+        $this->GetDataUPdate($key);
     }
 
 
@@ -82,7 +91,7 @@ public function GetMailGroupTwo(Request $request)
    
     foreach($result as $key) {
        
-        GetEmail($key);
+        $this->GetEmail($key);
     }
 
 
@@ -92,9 +101,9 @@ public function GetMailGroupTwo(Request $request)
 public function GetMail($id)
 {
     $key = $id;
- 
-    //GetEmail($key);
-    GetDataUPdate($key);
+
+    $this->GetEmail($key);
+    $this->GetDataUPdate($key);
     return redirect('list-charge')->with('messageEmail', 'ส่ง Gmail เรียบร้อย' );
 }
 

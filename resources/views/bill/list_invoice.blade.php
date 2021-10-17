@@ -74,7 +74,7 @@
                                                                         class="col-sm-4 col-form-label">วันที่ส่งของ</label>
                                                                     <div class="col-sm-7">
                                                                         <input type="text" id="dataOut" name="dataOut"
-                                                                            class="form-control datepicker dataget">
+                                                                            class="form-control datepicker dataget"  placeholder="2021-10-01">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -84,7 +84,7 @@
                                                                         class="col-sm-2 col-form-label">ถึง</label>
                                                                     <div class="col-sm-7">
                                                                         <input type="text" id="dataEnd" name="dataEnd"
-                                                                            class="form-control datepicker_out dataget">
+                                                                            class="form-control datepicker_out dataget"  placeholder="2021-10-01">
 
                                                                     </div>
                                                                     <button class="btn btn-outline-secondary col-sm-2"

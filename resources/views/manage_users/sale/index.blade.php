@@ -147,7 +147,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">เพิ่มเซลล์ </h5>
-                <p class="text-header" id="message">เเก้ไขเซลล์</p>
+                <p class="text-header" id="message"></p>
                 <p>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><i
                             class="fas fa-times-circle dark-icon"></i></button>

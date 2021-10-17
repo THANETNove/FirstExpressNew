@@ -137,7 +137,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-8">
                                                     <input type="text" class="form-control text-right input_number" id="idInput1" value=""
-                                                        placeholder="000.00"  onChange="change_send(this.value)" aria-label="Username"
+                                                        placeholder="000.00"  onclick="change_send(this.value)" aria-label="Username"
                                                         aria-describedby="basic-addon1">
                                                 </div>
                                                 <div class="col-md-4">

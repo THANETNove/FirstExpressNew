@@ -70,11 +70,12 @@ $(function() {
  <script type="text/javascript">
 var i = 1;
 var id;
-
+var v = 1;
 
 function myCreateFunction() {
 
     id = ++i;
+    vId = ++v;
     // console.log(id,i);
     var id_name_0 = 'name_0' + id;
     var id_name_1 = 'name_1' + id;
@@ -111,11 +112,11 @@ function myCreateFunction() {
     cell7.outerHTML =
         " <td><div class='row'><div class='col-sm-12 col-md-8'><input type='text' class='form-control text-right input_number' id='" +
         idInput +
-        "' value='' placeholder='000.00'  onChange='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows'  onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunction()'> <i class='fas fa-plus'></i></a></div></div></td>";
+        "' value='' placeholder='000.00'  onclick='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows'  onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunction()'> <i class='fas fa-plus'></i></a></div></div></td>";
 
 
 
-    $('#my_id').html(id);
+    $('#my_id').html(vId);
     $('.datepicker').datepicker({
         minDate: -20,
         maxDate: "+1M +10D",
@@ -125,11 +126,21 @@ function myCreateFunction() {
     });
     //console.log(item);
 
+
+    $('.input_number').on("input", function() {
+
+        jQuery('.input_number').click();
+
+        });
+
+
+
 }
 
 function myCreateFunctionTwo(item) {
 
     id = i++;
+    vId = v++;
     // console.log(id,i);
     var id_name_0 = 'name_0' + id;
     var id_name_1 = 'name_1' + id;
@@ -168,7 +179,7 @@ function myCreateFunctionTwo(item) {
         cell7.outerHTML =
             " <td><div class='row'><div class='col-sm-12 col-md-8'><input type='text' class='form-control text-right input_number' id='" +
             idInput + "'value='" + item.billingAmount +
-            "' placeholder='000.00'  onChange='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows' onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunctionTwo()'> <i class='fas fa-plus'></i></a></div></div></td>";
+            "' placeholder='000.00'  onclick='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows' onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunctionTwo()'> <i class='fas fa-plus'></i></a></div></div></td>";
     } else {
         cell2.innerHTML = "<input type='text '  id='" + id_name_0 + "' name='" + id_name_0 +
             "'  value=''  placeholder='IN-201860006'  class='form-control text-right check-td'>";
@@ -183,12 +194,12 @@ function myCreateFunctionTwo(item) {
         cell7.outerHTML =
             " <td><div class='row'><div class='col-sm-12 col-md-8'><input type='text' class='form-control text-right input_number' id='" +
             idInput +
-            "'value='' placeholder='000.00'  onChange='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows' onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunctionTwo()'> <i class='fas fa-plus'></i></a></div></div></td>";
+            "'value='' placeholder='000.00'  onclick='change_send(this.value)'></div><div class='col-sm-12 col-md-4'><a type='button' id='deleteRows' onclick='myDeleteFunction(this)'  value='Del'> <i class='fas fas fa-times'></i></a>&nbsp;&nbsp;<a type='button' onclick='myCreateFunctionTwo()'> <i class='fas fa-plus'></i></a></div></div></td>";
     }
 
 
 
-    $('#my_id').html(id);
+    $('#my_id').html(vId);
     $('.datepicker').datepicker({
         minDate: -20,
         maxDate: "+1M +10D",
@@ -197,13 +208,18 @@ function myCreateFunctionTwo(item) {
         altField: "#alt-date"
     });
     //console.log(item);
+    $('.input_number').on("input", function() {
+
+        jQuery('.input_number').click();
+
+        });
 
 }
 
 var munberA = 0;
 
 function myDeleteFunction(node) {
-    //console.log('dasasdasdd');
+
     let numVal = $(node).parents().children(3).children(3).children(10).eq(2).val();
     //console.log(numVal);
     namValA = munberA - Number(numVal); // ยอดรวมสุทธิ
@@ -226,8 +242,11 @@ function myDeleteFunction(node) {
 
 
     let mm = $(node).parents().eq(3).remove(); //remove row
-    let uu = $('.count-row');
-    let id_count = uu.length + 1;
+    var totalItems = $("#my_id").html();
+
+
+    let id_count = totalItems - 1;
+    v = id_count + 1;
 
     $('#my_id').html(id_count);
 
@@ -248,7 +267,7 @@ $(function() {
     } else if (pathName === 'charge') {
         pathName = 'list-charge';
     } else if (pathName === 'list-cellCommission') {
-        pathName = 'cell-commission';
+        pathName = 'list-cellCommission';
     } else if (pathName === 'cost-price') {
         pathName = 'shipping-rate';
     } else {
@@ -271,22 +290,41 @@ $(function() {
 
 
 
+$('.input_number').on("input", function() {
+
+   jQuery('.input_number').click();
+
+});
+
+
+
 function change_send(x) {
-    const cars = x.split(",");
-    let textNumber = "";
-    for (let i = 0; i < cars.length; i++) {
-        textNumber += cars[i];
-    }
+    let textNumber = [];
+     $('.input_number').each(function() {
+        text = Number($(this).val());
+        textNumber.push(text);   
+
+        });
+
+       let sum =  textNumber.reduce((previosValuie, currentValue) => {
+        return previosValuie + currentValue;
+     }
+    )
+      
 
 
-    if (isNaN(textNumber)) {
+
+  
+    if (isNaN(sum)) {
 
         $('#price_products').html(' ' + 'บาท');
     } else {
 
-        numberB = Number(textNumber); ///ยอดรวมสุทธิ
-        munberA = numberB + munberA;
-        //console.log(munberA);
+
+      
+        numberB = Number(sum); ///ยอดรวมสุทธิ
+        munberA = numberB
+       // console.log(munberA , numberB);
         let vat = (munberA * 7) / 100;
         let sumVatA = munberA + vat;
         nunFixed = sumVatA.toFixed(2);
@@ -334,7 +372,7 @@ function editInvoice(datajson) {
 
 
 function Invoice() {
-   // console.log('22222');
+    // console.log('22222');
     var issuedDateIssue = jQuery('#date-issued1').val();
     var dateDue = jQuery('#date-end2').val();
     var documentThat = jQuery('#idBn-2018').val();
@@ -389,7 +427,7 @@ function Invoice() {
             success: function(data) {
                 valid = data.message;
                 $('#massageData').html(valid);
-                location.replace("{{ url('customer') }}");
+                //  location.replace("{{ url('customer') }}");
             },
         });
 
@@ -398,6 +436,8 @@ function Invoice() {
     }
 
 }
+
+
 
 
 

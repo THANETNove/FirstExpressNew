@@ -143,6 +143,22 @@ class CustomerController extends Controller
             'province' => $request['province'],
             
         ]);
+
+
+        $countCustomers = DB::table('customers')
+        ->where("cell_code", '=', $request['cell_code'])
+        ->count();
+
+        $countSale = DB::table('sales')
+        ->where("codeSales", '=', $request['cell_code'])
+        ->get();
+
+        $countId = $countSale[0]->id;
+
+
+        $countCus = Sale::find($countId);
+        $countCus->numberCustomers =$countCustomers;
+        $countCus->save();
             return redirect('customer')->with('message_status', 'เพิ่ม ข้อมูลเรียบร้อย' );
     }
 

@@ -46,8 +46,9 @@
                                         <!-- Default box -->
                                         <div class="card">
                                             <div class="card-header">
-                                            <div class="card-tools">
-                                                    <a href="{{url('export-excel')}}" class="btn btn-danger " >สั่งออกไฟล์ Elsx
+                                                <div class="card-tools">
+                                                    <a href="{{url('export-excel')}}"
+                                                        class="btn btn-danger ">สั่งออกไฟล์ Elsx
                                                         <i class="fas fa-file-excel text-left white-icon"></i>
                                                     </a>
                                                 </div>
@@ -60,29 +61,32 @@
                                                                 <div class="col-sm-6">
                                                                     <select class="form-control"
                                                                         aria-label="Default select example">
-                                                                        <option selected>Open this select menu</option>
-                                                                        <option value="1">One</option>
-                                                                        <option value="2">Two</option>
-                                                                        <option value="3">Three</option>
+                                                                        @foreach ($invoiceName as $invoice)
+                                                                        <option value="{{$invoice->name}}">
+                                                                            {{$invoice->name}}
+                                                                        </option>
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
-                                                        <div class="mb-3 row">
+                                                            <div class="mb-3 row">
                                                                 <label for="inputPassword"
                                                                     class="col-sm-4 col-form-label">เดือน</label>
                                                                 <div class="col-sm-7">
-                                                                    <input type="text" id="datepicker" class="form-control datepicker">
+                                                                    <input type="text" id="datepicker"
+                                                                        class="form-control datepicker" placeholder="2021-10-01">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
-                                                        <div class="mb-3 row">
+                                                            <div class="mb-3 row">
                                                                 <label for="inputPassword"
                                                                     class="col-sm-2 col-form-label">ถึง</label>
                                                                 <div class="col-sm-7">
-                                                                    <input type="text" id="datepicker_out" class="form-control datepicker_out">
+                                                                    <input type="text" id="datepicker_out"
+                                                                        class="form-control datepicker_out" placeholder="2021-10-01">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -126,6 +130,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                @foreach ($salesSale as $sale)
                                                                     <tr class="odd">
                                                                         <td>
                                                                             <div class="text-center">
@@ -134,12 +139,13 @@
                                                                                     id="flexCheckDefault">
                                                                             </div>
                                                                         </td>
-                                                                        <td>CUS-2431</td>
-                                                                        <td>พี่หวาน</td>
-                                                                        <td>35</td>
-                                                                        <td>125</td>
+                                                                        <td>{{$sale->codeSales}}</td>
+                                                                        <td>{{$sale->username}}</td>
+                                                                        <td>{{$sale->numberCustomers}}</td>
+                                                                        <td>{{$sale->numberParcels}}</td>
                                                                         <td>1 %</td>
                                                                     </tr>
+                                                                    @endforeach
                                                                 </tbody>
                                                             </table>
                                                         </div>
