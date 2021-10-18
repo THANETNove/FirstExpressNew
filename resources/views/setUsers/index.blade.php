@@ -168,18 +168,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('setUp-Users.store') }}">
-                 @csrf
                 <div class="mb-3 row">
                     <p for="staticEmail" class="col-sm-3  text-right thickeb">ชื่อบทบาท: </p>
                     <div class="col-sm-9">
-                        <input type="text" name="rolename"  value="" class="form-control col-md-11">
+                        <input type="text" name="rolename"  id="rolename" value="" class="form-control col-md-11">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <p class="col-sm-3  text-right thickeb">คำอธิบายบทบาท: </p>
                     <div class="col-sm-9">
-                        <input type="text"   name="roledescription"  value="" class="form-control  col-md-11">
+                        <input type="text"   name="roledescription" id="scripting"  value="" class="form-control  col-md-11">
                     </div>
                 </div>
                 <div class="container">
@@ -204,31 +202,31 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                    <input type="checkbox" class="custom-control-input manage-users" id="customSwitch2">
                                     <label class="custom-control-label" for="customSwitch2"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                                    <input type="checkbox" class="custom-control-input manage-users" id="customSwitch3">
                                     <label class="custom-control-label" for="customSwitch3"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                                    <input type="checkbox" class="custom-control-input manage-users" id="customSwitch4">
                                     <label class="custom-control-label" for="customSwitch4"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch5">
+                                    <input type="checkbox" class="custom-control-input manage-users" id="customSwitch5">
                                     <label class="custom-control-label" for="customSwitch5"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch6">
+                                    <input type="checkbox" class="custom-control-input manage-users" id="customSwitch6">
                                     <label class="custom-control-label" for="customSwitch6"></label>
                                 </div>
                             </div>
@@ -254,19 +252,19 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch8">
+                                    <input type="checkbox" class="custom-control-input manage-account" id="customSwitch8">
                                     <label class="custom-control-label" for="customSwitch8"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch9">
+                                    <input type="checkbox" class="custom-control-input manage-account" id="customSwitch9">
                                     <label class="custom-control-label" for="customSwitch9"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch10">
+                                    <input type="checkbox" class="custom-control-input manage-account" id="customSwitch10">
                                     <label class="custom-control-label" for="customSwitch10"></label>
                                 </div>
                             </div>
@@ -287,31 +285,31 @@
                         <div class="col-md-2 text-center">
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch11">
+                                    <input type="checkbox" class="custom-control-input settings" id="customSwitch11">
                                     <label class="custom-control-label" for="customSwitch11"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch12">
+                                    <input type="checkbox" class="custom-control-input settings" id="customSwitch12">
                                     <label class="custom-control-label" for="customSwitch12"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch13">
+                                    <input type="checkbox" class="custom-control-input settings" id="customSwitch13">
                                     <label class="custom-control-label" for="customSwitch13"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch14">
+                                    <input type="checkbox" class="custom-control-input settings" id="customSwitch14">
                                     <label class="custom-control-label" for="customSwitch14"></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch15">
+                                    <input type="checkbox" class="custom-control-input settings" id="customSwitch15">
                                     <label class="custom-control-label" for="customSwitch15"></label>
                                 </div>
                             </div>
@@ -333,12 +331,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit"  class="btn btn-danger">บันทึก</button>
+                                <button type="submit" id="submitCkik" class="btn btn-danger">บันทึก</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>
@@ -371,7 +368,7 @@
                 <div class="mb-3 row">
                     <p class="col-sm-3  text-right thickeb">คำอธิบายบทบาท: </p>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control col-md-11">
+                        <input type="text"  class="form-control col-md-11">
                     </div>
                 </div>
                 <div class="container">
@@ -549,5 +546,5 @@
 </div>
 <!-- ./wrapper -->
 @include('maun_footer.footer')
-
+@include('setUsers.script.index')
 @endsection

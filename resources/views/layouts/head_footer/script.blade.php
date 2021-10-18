@@ -220,35 +220,12 @@ var munberA = 0;
 
 function myDeleteFunction(node) {
 
-    let numVal = $(node).parents().children(3).children(3).children(10).eq(2).val();
-    //console.log(numVal);
-    namValA = munberA - Number(numVal); // ยอดรวมสุทธิ
-    let vatB = (namValA * 7) / 100;
-
-    let sumVatB = namValA + vatB;
-    let nunFixedD = sumVatB.toFixed(2);
-    let splitB = nunFixedD.split(".");
-    let arrayB0 = splitB[0];
-    let arrayB1 = splitB[1]
-    let maxB1 = new Intl.NumberFormat().format(arrayB0);
-    $('#sumVat').html(maxB1 + '.' + arrayB1);
-
-    let nunFixedAB = namValA.toFixed(2); // ราคาสุทธิสินค้าที่เสียภาษี
-    let splitAD = nunFixedAB.split(".");
-    let arrayD2 = splitAD[0];
-    let arrayD3 = splitAD[1];
-    let maxA2 = new Intl.NumberFormat().format(arrayD2);
-    $('#price_products').html(maxA2 + '.' + arrayD3);;
-
 
     let mm = $(node).parents().eq(3).remove(); //remove row
-    var totalItems = $("#my_id").html();
 
-
-    let id_count = totalItems - 1;
-    v = id_count + 1;
-
-    $('#my_id').html(id_count);
+    change_send();
+ 
+   
 
 }
 
@@ -257,7 +234,7 @@ $(function() {
 
     //console.log(urlPath);
     let strPath = urlPath.split("/");
-    let pathName = strPath[4];
+    let pathName = strPath[2];
     //console.log(pathName,urlPath);
 
     if (pathName === 'create-invoice') {

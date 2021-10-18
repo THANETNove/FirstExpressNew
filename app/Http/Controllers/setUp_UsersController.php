@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Collective\Html\FormFacade;
+use App\Models\SetUpMenu;
+use Illuminate\Support\Facades\DB;
 
 class setUp_UsersController extends Controller
 {
@@ -15,6 +17,14 @@ class setUp_UsersController extends Controller
      */
     public function index()
     {
+
+     /*   $users = DB::table('menus')
+        ->rightJoin('set_up_menus', 'menus.id', '=', 'set_up_menus.idname')
+        ->where("set", '=', '1')
+        //->orWhere("lv2", '=', '1')
+        ->get();
+*/
+        //dd( $users);
         return view('setUsers.index');
     }
 
@@ -37,7 +47,32 @@ class setUp_UsersController extends Controller
     public function store(Request $request)
     {
       //  Form::checkbox('name', 'value');
-    dd($request->all());
+      // dd( $request->all());
+
+      SetUpMenu::create([
+            'rolename' => $request['rolename'],
+            'scripting' => $request['scripting'],
+            'manageusers' => $request['switch1'],
+            'viewusers' => $request['switch2'],
+            'adduser' => $request['switch3'],
+            'deleteuser' => $request['switch4'],
+            'edituser' => $request['switch5'],
+            'setuproles' => $request['switch6'],
+            'manageaccount' => $request['switch7'],
+            'manageinvoices' => $request['switch8'],
+            'manageCOD' => $request['switch9'],
+            'managecommissions' => $request['switch10'],
+            'settings' => $request['switch11'],
+            'viewshipping' => $request['switch12'],
+            'editshipping' =>  $request['switch13'],
+            'viewcommission' => $request['switch14'],
+            'editcommission' =>  $request['switch15'],
+            'report' =>  $request['switch16'],
+        ]);
+
+        return response()->json(['message'=>'บันทึก เรียบร้อย']);
+
+
     }
 
     /**

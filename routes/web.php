@@ -108,6 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('/setUp-Users', setUp_UsersController::class);
+    Route::post('/setUp-switch', [setUp_UsersController::class, 'store']);
 });
 
 Route::group(['middleware' => 'auth'], function () {
