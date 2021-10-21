@@ -4,13 +4,13 @@ $("#customSwitch1").change(function() {
     let checked = $(this)[0].checked;
 
     if (checked === true) {
-        $('.manage-users').removeAttr("disabled", "false");
         $("#customSwitch1").prop("checked", true);
+        $('.manage-users').removeAttr("disabled", "false");
         $('.manage-users').prop("checked", true);
 
     } else {
-        $('.manage-users').prop("checked", false);
         $("#customSwitch1").prop("checked", false);
+        $('.manage-users').prop("checked", false);
         $('.manage-users').attr("disabled", "true");
 
     }
@@ -46,8 +46,8 @@ $("#customSwitch11").change(function() {
         $('.settings').prop("checked", true);
 
     } else {
-        $('.settings').prop("checked", false);
         $("#customSwitch11").prop("checked", false);
+        $('.settings').prop("checked", false);
         $('.settings').attr("disabled", "true");
 
     }
